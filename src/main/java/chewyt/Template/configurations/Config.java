@@ -25,8 +25,8 @@ public class Config {
     private Optional<Integer> redisPort;
 
     // >>>>>>>> Uncomment/Comment
-    @Value("${spring.redis.password}")
-    private Optional<String> redisPassword;
+    // @Value("${spring.redis.password}")
+    // private Optional<String> redisPassword;
     // >>>>>>>> Uncomment/Comment
 
     Logger logger = Logger.getLogger(Config.class.getName());
@@ -38,8 +38,8 @@ public class Config {
         config.setPort(redisPort.get());
 
         // >>>>>>>> Uncomment/Comment either one
-        // config.setPassword(ENV_REDISCLOUD);
-        config.setPassword(redisPassword.get());
+        config.setPassword(ENV_REDISCLOUD);
+        // config.setPassword(redisPassword.get());
         // >>>>>>>> Uncomment/Comment either one
 
         return new JedisConnectionFactory(config);
