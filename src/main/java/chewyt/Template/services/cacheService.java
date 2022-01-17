@@ -10,13 +10,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import chewyt.Template.models.Hero;
 import chewyt.Template.repositories.standardRepo;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
-import static chewyt.Template.Constants.*;
 
 
 @Service
@@ -27,32 +27,32 @@ public class cacheService {
 
     private final Logger logger = Logger.getLogger(cacheService.class.getName());
 
-    public Optional<List<Object>> get(String something) {
+    public Optional<List<Hero>> get(String jsonString) {
 
-        Optional<String> opt  = repo.get(something);
+        Optional<String> opt  = repo.get(jsonString);
         if (opt.isEmpty()) {
-            logger.info("Search term \" %s \"is not found".formatted(something));
+            logger.info("Search term \" %s \"is not found".formatted(jsonString));
             return Optional.empty();
         }
         else{
             //converting Json string back to JSon Array
             //opt.get ==> Json String, which can be unstringify to JsonArray or JsonObject
             JsonArray jsonarray  = parseJsonArray(opt.get());
-            JsonObject jsonObject = parseJsonObject(opt.get());
+            // JsonObject jsonObject = parseJsonObject(opt.get());
             
             
             //For Arrays
             //converting into a list of Weather objects
-            List<Object> thatList  = jsonarray.stream()
+            List<Hero> thatList  = jsonarray.stream()
                 .map(v->(JsonObject)v)     //cast as a stream of Json Objects
-                //.map(Object::createFromCache) //cast as a stream of Weather objects
+                .map(Hero::createfromJsonArray) //cast as a stream of Weather objects
                 .collect(Collectors.toList()); //collect as a Collection List of Weather Objects
             return Optional.of(thatList);
 
             //For Object
             //converting into a list of Weather objects
             
-            return Optional.of(Object.create(jsonObject));
+            // return Optional.of(Hero.create());
 
         }
     }
@@ -75,6 +75,14 @@ public class cacheService {
             //Log errors
         }
         return Json.createObjectBuilder().build();
+    }
+
+    public void save(String hero, List<Hero> searchList) {
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        searchList.stream()
+            .forEach(v->arrayBuilder.add(v.toJson()));
+        repo.save(hero, arrayBuilder.build().toString());
+    
     }
 
     //List weater convert to Json array back to Json string

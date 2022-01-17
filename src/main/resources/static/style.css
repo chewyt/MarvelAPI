@@ -1,0 +1,65 @@
+.searchbar {
+    width: 80%;
+  }
+
+  body{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: url(https://i.annihil.us/u/prod/marvel/i/mg/8/e0/52bdf830aa094.jpg) no-repeat center;
+    height: 660px;
+    background-color: rgba(0,0,0,0.85);
+  }
+
+  body.results{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* flex-direction: column; */
+    justify-content:center;
+    background: url(https://terrigen-cdn-dev.marvel.com/content/prod/1x/a44.jpg) no-repeat center ;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: rgba(0,0,0,0.4);
+  }
+  .icon{
+    border: 2px;
+    border-color: black;
+    box-shadow: -1px 1px 10px 5px rgba(0,0,0,0.3);
+    border-radius: 5px;
+  }
+
+  lining{
+    border-right: 2px;
+  }
+
+  .error{
+    color: red;
+    
+  }
+
+
+  div.images {
+    opacity: 0.83;
+  }
+  p{
+    color: whitesmoke;
+  }
+
+  img{
+    border-radius: 10px;
+  }
+
+  .wrapper{
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-gap: 1em;
+    grid-auto-rows: minmax(120px, auto);
+  }
+
+  h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

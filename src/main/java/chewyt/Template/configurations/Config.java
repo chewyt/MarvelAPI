@@ -1,3 +1,4 @@
+package chewyt.Template.configurations;
 
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -7,12 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
+// import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+// import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+// import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import chewyt.Template.TemplateApplication;
+// import chewyt.Template.TemplateApplication;
 import static chewyt.Template.Constants.*;
 
 @Configuration
@@ -37,7 +38,7 @@ public class Config {
         config.setPort(redisPort.get());
 
         // >>>>>>>> Uncomment/Comment either one
-        config.setPassword(ENV_REDISCLOUD);
+        // config.setPassword(ENV_REDISCLOUD);
         config.setPassword(redisPassword.get());
         // >>>>>>>> Uncomment/Comment either one
 
@@ -48,7 +49,7 @@ public class Config {
     public RedisTemplate<String, Object> redisTemplate() {
 
         final RedisTemplate<String, Object> template = new RedisTemplate<>();
-        RedisSerializer<Object> serializer = new JdkSerializationRedisSerializer(getClass().getClassLoader());
+        // RedisSerializer<Object> serializer = new JdkSerializationRedisSerializer(getClass().getClassLoader());
 
         // Ops for Value (Good for storing JSON string)
         template.setKeySerializer(new StringRedisSerializer());
